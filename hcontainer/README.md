@@ -21,7 +21,7 @@ HContainer, 模拟sprin核心模块实现
 - 实现AOP
 
 ## 第四阶段
-- 模拟实现mybatis
+- 实现事物
 
 ## 插件集成
 - 集成mybatis
