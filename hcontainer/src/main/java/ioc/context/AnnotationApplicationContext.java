@@ -18,6 +18,7 @@ public class AnnotationApplicationContext extends AbstractApplicationContext {
 
     @Override
     public void refresh() {
-        getBeanFactory().loadBeanDefinitions(packageScan);
+        AnnotationConfigBeanFactory beanFactory = (AnnotationConfigBeanFactory) getBeanFactory();
+        beanFactory.loadBeanDefinitions(packageScan);
     }
 }

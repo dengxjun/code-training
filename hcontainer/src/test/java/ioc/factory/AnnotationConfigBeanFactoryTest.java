@@ -16,7 +16,7 @@ public class AnnotationConfigBeanFactoryTest {
     @Test
     public void loadBeanDefinitions() {
         log.debug("start.....");
-        BeanFactory beanFactory = new AnnotationConfigBeanFactory();
+        AnnotationConfigBeanFactory beanFactory = new AnnotationConfigBeanFactory();
         beanFactory.loadBeanDefinitions("bussinessproject");
         try {
             DemoService obj1 = (DemoService)beanFactory.getBean(DemoService.class);

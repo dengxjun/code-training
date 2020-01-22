@@ -77,13 +77,8 @@ public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
             }
 
 
-
-            String beanName = null;
-
-            praseComponentAnnotation(beanName, definition , cls);
-            praseControllerAnnotation(beanName, definition , cls);
-
-            definition.setBeanName(beanName);
+            praseComponentAnnotation(definition , cls);
+            praseControllerAnnotation(definition , cls);
 
             Field[] fields = cls.getDeclaredFields();
             if (fields.length > 0){
@@ -95,11 +90,13 @@ public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
                 }
             }
 
-            beanNameDefinitionMap.put(beanName,definition);
+            beanNameDefinitionMap.put(definition.getBeanName(),definition);
         }
     }
 
-    public void praseControllerAnnotation(String beanName, BeanDefinition definition, Class cls){
+    public void praseControllerAnnotation(BeanDefinition definition, Class cls){
+
+        String beanName = null;
 
         Controller clsDeclaredAnnotation = (Controller)cls.getDeclaredAnnotation(Controller.class);
 
@@ -112,6 +109,7 @@ public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
         if (StrUtil.isEmpty(beanName)){
             beanName = StrUtil.toLowCaseFirstChar(cls.getSimpleName());
         }
+        definition.setBeanName(beanName);
 
         List lst = typeAnnotationDefinitionMap.get(Controller.class);
         if (lst == null){
@@ -122,7 +120,9 @@ public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
         typeAnnotationDefinitionMap.put(Controller.class, lst);
     }
 
-    private void praseComponentAnnotation(String beanName, BeanDefinition definition, Class cls){
+    private void praseComponentAnnotation(BeanDefinition definition, Class cls){
+
+        String beanName = null;
 
         Component clsDeclaredAnnotation = (Component)cls.getDeclaredAnnotation(Component.class);
 
@@ -135,6 +135,7 @@ public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
         if (StrUtil.isEmpty(beanName)){
             beanName = StrUtil.toLowCaseFirstChar(cls.getSimpleName());
         }
+        definition.setBeanName(beanName);
     }
 
 
