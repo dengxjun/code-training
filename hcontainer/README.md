@@ -1,7 +1,7 @@
 # 项目介绍
 HContainer, 模拟sprin核心模块实现
 
-## 第一阶段
+## 第一阶段（进行中）
 - 模拟实现spring IOC核心功能
 - 模拟实现spring mvc核心功能
 - 练习项目测试
