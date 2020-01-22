@@ -23,6 +23,8 @@ public abstract class AbstractBeanFactory implements BeanFactory{
 
     protected Map<String, Object> cachedBeans = new HashMap<>();
 
+    abstract void loadBeanDefinitions(String scanPackages);
+
     @Override
     public Object getBean(String beanName){
         Object obj = cachedBeans.get(beanName);

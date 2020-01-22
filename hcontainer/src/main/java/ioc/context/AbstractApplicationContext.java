@@ -36,11 +36,6 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
 
 
     @Override
-    public void loadBeanDefinitions(String scanPackages) {
-
-    }
-
-    @Override
     public Object getBean(String beanName) {
         return getBeanFactory().getBean(beanName);
     }

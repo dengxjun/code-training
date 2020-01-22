@@ -7,8 +7,6 @@ package ioc.factory;
  */
 public interface BeanFactory {
 
-    void loadBeanDefinitions(String scanPackages);
-
     Object getBean(String beanName);
 
     Object getBean(Class cls);
