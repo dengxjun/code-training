@@ -11,6 +11,7 @@
         <module>hcontainer</module>
         <module>trains-problems</module>
         <module>hc-test</module>
+        <module>bread</module>
     </modules>
 
     <packaging>pom</packaging>
