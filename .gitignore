@@ -32,4 +32,5 @@ spring-*/src/main/java/META-INF/MANIFEST.MF
 .idea
 out
 test-output
+javadoc
 atlassian-ide-plugin.xml
