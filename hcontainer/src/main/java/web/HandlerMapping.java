@@ -23,6 +23,17 @@ public class HandlerMapping {
 
     private WebApplicationContext webApplicationContext;
 
+    /**
+     * <p>初始化handlerMapping对象，步骤：
+     * <p>
+     *     1. 获取所有被@Controller标注过的类的BeanDefinition <br>
+     *     2. 解析BeanDefinition对象 <br>
+     *     2.1. 获取类级别RequestMapping信息 <br>
+     *     2.2. 获取方法级别RequestMapping信息 <br>
+     *     2.3. 构造MethodHandler对象 <br>
+     *     2.4. 拼接path后保存path，methodHandler到map中 <br>
+     * @param wac WebApplicationContext对象
+     */
     public void init(WebApplicationContext wac){
         webApplicationContext = wac;
         AnnotationConfigBeanFactory beanFactory = (AnnotationConfigBeanFactory)wac.getBeanFactory();
@@ -46,6 +57,7 @@ public class HandlerMapping {
                 methodHander.setTargetMethodName(method.getName());
                 methodHander.setParams(method);
                 methodHander.setTargetClass(targetClass);
+                methodHander.setRequestMethod(typeRM.method());
                 urlHanderMap.put(StrUtil.catPath(tpyePath, methodPath), methodHander);
             }
         }
@@ -56,12 +68,28 @@ public class HandlerMapping {
         return urlHanderMap.get(url);
     }
 
+    /**
+     * <p>Handler调用逻辑<br>
+     *  <li> 1. 从hc容器中获取Controller bean
+     *  <li> 2. 解析request请求中的参数
+     *  <li> 3. 执行调用
+     * </p>
+     * @param methodHander
+     * @param req
+     * @return ModelAndView对象
+     */
     public Object invoke(MethodHander methodHander, HttpServletRequest req) {
         Object obj = webApplicationContext.getBean(methodHander.getTargetClass());
         Object[] params = getRequetParameters(methodHander, req);
         return methodHander.invoke(obj,params);
     }
 
+    /**
+     * <p>获取HTTP get 请求方式中的参数</p>
+     * @param methodHander
+     * @param req
+     * @return
+     */
     private Object[] getRequetParameters(MethodHander methodHander, HttpServletRequest req) {
         List<String> methodParamNames = methodHander.getMethodParamsField();
         Object[] paramValue = new Object[methodParamNames.size()];
