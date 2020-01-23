@@ -3,9 +3,9 @@ package ioc.utils;
 import java.util.regex.Pattern;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/19 17:29
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/19 17:29
+ *
  */
 public class PathUtil {
 

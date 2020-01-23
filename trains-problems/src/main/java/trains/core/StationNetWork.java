@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/30 14:17
- * @Description: 火车站连接关系
+ * @author: 邓小军
+ * @since: 2019/12/30 14:17
+ *  火车站连接关系
  */
 public class StationNetWork {
 

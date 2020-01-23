@@ -6,9 +6,9 @@ import trains.core.StationNetWork;
 import trains.output.FootPrint;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/30 10:12
- * @Description: 固定站点计算-邻接表深度优先遍历
+ * @author: 邓小军
+ * @since: 2019/12/30 10:12
+ *  固定站点计算-邻接表深度优先遍历
  */
 public class ExactlyStopQuestionProcess implements QuestuionProcess{
 

@@ -3,9 +3,10 @@ package ioc.context;
 import ioc.factory.BeanFactory;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/20 14:42
- * @Description:
+ *
+ * @author: 邓小军
+ * @since: 2020/1/20 14:42
+ *
  */
 public abstract class AbstractApplicationContext implements ApplicationContext {
 

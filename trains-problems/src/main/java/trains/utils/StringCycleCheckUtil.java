@@ -1,9 +1,9 @@
 package trains.utils;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/30 20:00
- * @Description:
+ * @author: 邓小军
+ * @since: 2019/12/30 20:00
+ *
  */
 public class StringCycleCheckUtil {
 

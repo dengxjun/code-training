@@ -1,9 +1,9 @@
 package web;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/20 16:23
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/20 16:23
+ *
  */
 public class ParamHandler {
 

@@ -5,9 +5,9 @@ import trains.core.StationNetWork;
 import trains.output.FootPrint;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/30 10:14
- * @Description: 最少站点计算-邻接表深度优先遍历
+ * @author: 邓小军
+ * @since: 2019/12/30 10:14
+ *  最少站点计算-邻接表深度优先遍历
  */
 public class LessThanDistanceQuestionProcess implements QuestuionProcess{
 

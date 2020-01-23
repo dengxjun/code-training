@@ -13,9 +13,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/30 17:11
- * @Description: 组装不同命令测试 && 多线程并发执行不同命令测试
+ * @author: 邓小军
+ * @since: 2019/12/30 17:11
+ *  组装不同命令测试 && 多线程并发执行不同命令测试
  *
  */
 public class TainControlCenterTest extends BaseTest {

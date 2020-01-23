@@ -3,9 +3,9 @@ package ioc.context;
 import ioc.factory.AnnotationConfigBeanFactory;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/20 14:44
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/20 14:44
+ *
  */
 public class AnnotationApplicationContext extends AbstractApplicationContext {
 

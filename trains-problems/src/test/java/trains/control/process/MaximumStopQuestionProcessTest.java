@@ -8,9 +8,9 @@ import trains.output.FootPrint;
 import static org.junit.Assert.*;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/2 10:26
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/2 10:26
+ *
  */
 public class MaximumStopQuestionProcessTest extends BaseTest{
 

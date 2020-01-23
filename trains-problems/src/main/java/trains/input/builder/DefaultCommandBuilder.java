@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/31 11:39
- * @Description: 默认命令构造器
+ * @author: 邓小军
+ * @since: 2019/12/31 11:39
+ *  默认命令构造器
  */
 public class DefaultCommandBuilder implements CommandBuilder {
     @Override

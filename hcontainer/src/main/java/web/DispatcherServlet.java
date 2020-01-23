@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/20 15:18
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/20 15:18
+ *
  */
 public class DispatcherServlet extends HttpServlet {
 

@@ -6,9 +6,9 @@ import trains.core.StationNetWork;
 import trains.output.FootPrint;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/30 10:11
- * @Description: 特定路长计算
+ * @author: 邓小军
+ * @since: 2019/12/30 10:11
+ *  特定路长计算
  */
 public class DistanceQuestionProcess implements QuestuionProcess {
 

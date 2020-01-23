@@ -5,9 +5,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/20 15:22
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/20 15:22
+ *
  */
 public class ContextLoaderListener implements ServletContextListener {
     @Override

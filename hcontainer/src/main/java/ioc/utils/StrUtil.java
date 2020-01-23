@@ -1,9 +1,9 @@
 package ioc.utils;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/20 10:52
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/20 10:52
+ *
  */
 public class StrUtil {
 

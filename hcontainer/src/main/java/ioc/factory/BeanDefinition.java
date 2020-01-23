@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/19 18:13
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/19 18:13
+ *
  */
 public class BeanDefinition {
 

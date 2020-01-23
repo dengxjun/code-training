@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/30 16:18
- * @Description: 列车调度中心
+ * @author: 邓小军
+ * @since: 2019/12/30 16:18
+ *  列车调度中心
  */
 public class TainControlCenter {
 

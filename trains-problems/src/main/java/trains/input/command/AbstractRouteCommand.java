@@ -4,9 +4,9 @@ import trains.control.process.QuestuionProcess;
 import trains.output.FootPrint;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/30 17:27
- * @Description:
+ * @author: 邓小军
+ * @since: 2019/12/30 17:27
+ *
  */
 public abstract class AbstractRouteCommand implements RouteCommand{
 

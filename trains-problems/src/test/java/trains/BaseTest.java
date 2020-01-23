@@ -4,9 +4,9 @@ import org.junit.BeforeClass;
 import trains.control.TainControlCenter;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/2 09:51
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/2 09:51
+ *
  */
 public class BaseTest {
 

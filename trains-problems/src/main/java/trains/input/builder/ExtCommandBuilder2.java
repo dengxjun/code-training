@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/31 11:45
- * @Description: 扩展命令构造器2
+ * @author: 邓小军
+ * @since: 2019/12/31 11:45
+ *  扩展命令构造器2
  */
 public class ExtCommandBuilder2 implements CommandBuilder {
     @Override

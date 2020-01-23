@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/20 14:58
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/20 14:58
+ *
  */
 public abstract class AbstractBeanFactory implements BeanFactory{
 

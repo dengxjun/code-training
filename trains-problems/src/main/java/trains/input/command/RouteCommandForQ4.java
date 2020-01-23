@@ -3,9 +3,9 @@ package trains.input.command;
 import trains.control.process.DistanceQuestionProcess;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/30 17:32
- * @Description:
+ * @author: 邓小军
+ * @since: 2019/12/30 17:32
+ *
  */
 public class RouteCommandForQ4 extends AbstractRouteCommand{
 
