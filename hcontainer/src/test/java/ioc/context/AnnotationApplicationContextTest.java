@@ -8,9 +8,9 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/20 15:11
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/20 15:11
+ *
  */
 public class AnnotationApplicationContextTest {
     private static Logger log = Logger.getLogger(AnnotationConfigBeanFactoryTest.class);

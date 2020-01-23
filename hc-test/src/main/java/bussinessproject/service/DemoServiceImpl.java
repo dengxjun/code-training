@@ -5,9 +5,9 @@ import ioc.annotation.Component;
 import ioc.annotation.Inject;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/19 14:15
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/19 14:15
+ *
  */
 
 @Component()

@@ -1,9 +1,9 @@
 package trains.core;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/30 14:36
- * @Description:
+ * @author: 邓小军
+ * @since: 2019/12/30 14:36
+ *
  */
 public class RouteInfo {
 

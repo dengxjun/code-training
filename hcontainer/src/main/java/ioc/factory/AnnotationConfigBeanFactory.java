@@ -13,9 +13,9 @@ import java.net.URL;
 import java.util.*;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/19 14:17
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/19 14:17
+ *
  */
 public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
     private static Logger log = Logger.getLogger(AnnotationConfigBeanFactory.class);

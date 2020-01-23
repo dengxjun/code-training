@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/20 16:10
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/20 16:10
+ *
  */
 public class MethodHander {
 

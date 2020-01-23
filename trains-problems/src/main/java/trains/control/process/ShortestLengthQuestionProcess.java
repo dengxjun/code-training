@@ -6,9 +6,9 @@ import trains.output.FootPrint;
 import trains.utils.StringCycleCheckUtil;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/30 10:13
- * @Description: 最短站点路径计算-邻接表深度优先遍历
+ * @author: 邓小军
+ * @since: 2019/12/30 10:13
+ *  最短站点路径计算-邻接表深度优先遍历
  */
 public class ShortestLengthQuestionProcess implements QuestuionProcess{
 

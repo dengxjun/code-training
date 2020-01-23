@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Auther: 邓小军
- * @Date: 2019/12/30 16:36
- * @Description:
+ * @author: 邓小军
+ * @since: 2019/12/30 16:36
+ *
  */
 public class FootPrint {
     private int result;

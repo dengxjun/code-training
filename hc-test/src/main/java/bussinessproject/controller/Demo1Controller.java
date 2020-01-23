@@ -4,9 +4,9 @@ import ioc.annotation.Controller;
 import ioc.annotation.RequestMapping;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/20 14:53
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/20 14:53
+ *
  */
 
 @Controller

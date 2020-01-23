@@ -4,9 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * @Auther: 邓小军
- * @Date: 2020/1/19 17:40
- * @Description:
+ * @author: 邓小军
+ * @since: 2020/1/19 17:40
+ *
  */
 public class PathUtilTest {
 
