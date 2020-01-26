@@ -26,7 +26,7 @@ public class DispatcherServlet extends HttpServlet {
         doService(req, resp);
     }
 
-    private void doService(HttpServletRequest req, HttpServletResponse resp){
+    private void doService(HttpServletRequest req, HttpServletResponse resp) throws IOException{
         MethodHander methodHander = mapping.getHandler(getPath(req));
         if (methodHander != null){
             Object result = mapping.invoke(methodHander, req);

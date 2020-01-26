@@ -1,5 +1,8 @@
 package ioc.utils;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * @author: 邓小军
  * @since: 2020/1/20 10:52
@@ -54,5 +57,15 @@ public class StrUtil {
         }
 
         return sb.toString();
+    }
+
+    public static String convertToStringFromInputStream(InputStream ips) throws IOException {
+        byte[] buffer = new byte[1024];
+        int byteRead = -1;
+        StringBuilder out = new StringBuilder();
+        while ((byteRead = ips.read(buffer)) != -1){
+            out.append(new String(buffer));
+        }
+        return out.toString();
     }
 }

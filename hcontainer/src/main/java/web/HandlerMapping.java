@@ -5,8 +5,12 @@ import ioc.annotation.RequestMapping;
 import ioc.factory.AnnotationConfigBeanFactory;
 import ioc.factory.BeanDefinition;
 import ioc.utils.StrUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import web.parser.HttpServletRequestParser;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +22,7 @@ import java.util.Map;
  *
  */
 public class HandlerMapping {
+    private static Logger logger = LoggerFactory.getLogger(HandlerMapping.class);
 
     private Map<String, MethodHander> urlHanderMap = new HashMap<>();
 
@@ -78,9 +83,9 @@ public class HandlerMapping {
      * @param req
      * @return ModelAndView对象
      */
-    public Object invoke(MethodHander methodHander, HttpServletRequest req) {
+    public Object invoke(MethodHander methodHander, HttpServletRequest req) throws IOException {
         Object obj = webApplicationContext.getBean(methodHander.getTargetClass());
-        Object[] params = getRequetParameters(methodHander, req);
+        Object[] params = resolveRequetParameters(methodHander, req);
         return methodHander.invoke(obj,params);
     }
 
@@ -90,21 +95,44 @@ public class HandlerMapping {
      * @param req
      * @return
      */
-    private Object[] getRequetParameters(MethodHander methodHander, HttpServletRequest req) {
+    private Object[] resolveRequetParameters(MethodHander methodHander, HttpServletRequest req) throws IOException {
         List<String> methodParamNames = methodHander.getMethodParamsField();
         Object[] paramValue = new Object[methodParamNames.size()];
         int idx = 0;
         for (ParamHandler paramHandler : methodHander.getParams()){
-            String pv = req.getParameter(paramHandler.getFieldName());
-            if (paramHandler.getType() == int.class || paramHandler.getType() == Integer.class ){
-                paramValue[idx] = Integer.valueOf(pv);
-            } else if(paramHandler.getType() == double.class || paramHandler.getType() == Double.class){
-                paramValue[idx] = Double.valueOf(pv);
-            }else {
-                paramValue[idx] = pv;
+            Object obj = resolveCommonRequestParameters(req, paramHandler);
+            if (obj == null){
+                obj = rsolveRequestBodyParameters(req, paramHandler);
             }
+            paramValue[idx] = obj;
             idx++;
         }
         return paramValue;
+    }
+
+    /** 解析url中参数*/
+    private Object resolveCommonRequestParameters(HttpServletRequest req, ParamHandler paramHandler) {
+        Object value = null;
+        String pv = req.getParameter(paramHandler.getFieldName());
+        if (pv == null){
+            return value;
+        }
+        if (paramHandler.getType() == int.class || paramHandler.getType() == Integer.class ){
+            value = Integer.valueOf(pv);
+        } else if(paramHandler.getType() == double.class || paramHandler.getType() == Double.class){
+            value = Double.valueOf(pv);
+        }else {
+            value = pv;
+        }
+        return value;
+    }
+
+    private Object rsolveRequestBodyParameters(HttpServletRequest req, ParamHandler paramHandler) throws IOException {
+        Object value = null;
+        String body = StrUtil.convertToStringFromInputStream(HttpServletRequestParser.getBody(req));
+
+        logger.info("-------{}",body);
+
+        return value;
     }
 }
