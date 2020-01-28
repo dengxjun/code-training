@@ -35,8 +35,8 @@ public class RequestParamMethodParametersResolver implements MethodParametersRes
             obj = rsolveRequestBodyParameters(req, parameter);
         }
 
-        Object paramInstance = parameter.getType().newInstance();
-        DataBinder dataBinder = new DataBinder(parameter.getFieldName(), paramInstance);
+//        Object paramInstance = parameter.getType().newInstance();
+        DataBinder dataBinder = new DataBinder(parameter.getFieldName(), null);
         obj = dataBinder.convertIfNecessary(obj, parameter.getType());
         return obj;
     }

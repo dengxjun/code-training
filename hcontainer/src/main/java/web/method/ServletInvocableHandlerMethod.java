@@ -3,6 +3,7 @@ package web.method;
 import web.method.resolver.MethodParametersResolver;
 import web.method.resolver.support.MapMethodParametersResolver;
 import web.method.resolver.support.ModleAttributeMethodParameterResolver;
+import web.method.resolver.support.RequestParamMethodParametersResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.InvocationTargetException;
@@ -25,6 +26,7 @@ public class ServletInvocableHandlerMethod{
     private List<MethodParametersResolver> methodParametersResolvers = new ArrayList<MethodParametersResolver>(){{
         add(new MapMethodParametersResolver());
         add(new ModleAttributeMethodParameterResolver());
+        add(new RequestParamMethodParametersResolver());
     }};
 
     public ServletInvocableHandlerMethod(HandlerMethod handlerMethod) {
@@ -70,6 +72,6 @@ public class ServletInvocableHandlerMethod{
             args[index] = obj;
             index++;
         }
-        return  new Object[0];
+        return  args;
     }
 }

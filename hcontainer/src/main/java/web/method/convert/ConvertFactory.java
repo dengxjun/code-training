@@ -8,7 +8,7 @@ package web.method.convert;
  */
 public class ConvertFactory {
     public static <T> Converter<String, T> getConverter(Class<T> targetType) {
-        if (targetType.isAssignableFrom(Number.class)){
+        if (Number.class.isAssignableFrom(targetType)){
             return new StringToNumberConverter(targetType);
         }else {
             return null;

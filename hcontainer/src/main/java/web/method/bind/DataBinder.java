@@ -22,6 +22,6 @@ public class DataBinder {
 
     public <T> T convertIfNecessary(Object value, Class<T> requiredType){
         Converter converter = ConvertFactory.getConverter(requiredType);
-        return (T)converter.convert(value);
+        return converter == null ? (T)value : (T)converter.convert(value);
     }
 }
