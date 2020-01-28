@@ -1,6 +1,6 @@
 package ioc.factory;
 
-import ioc.utils.StrUtil;
+import ioc.util.StrUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

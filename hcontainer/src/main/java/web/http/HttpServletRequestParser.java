@@ -1,4 +1,6 @@
-package web.parser;
+package web.http;
+
+import web.http.constant.HttpConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
@@ -13,11 +15,7 @@ import java.util.Set;
  */
 public class HttpServletRequestParser {
 
-    protected static final String FORM_CONTENT_TYPE = "application/x-www-form-urlencoded";
 
-    protected static final String METHOD_POST = "POST";
-    
-    protected static final String FORM_CHARSET = "UTF-8";
     
 
     public static InputStream getBody(HttpServletRequest req) throws IOException{
@@ -53,7 +51,7 @@ public class HttpServletRequestParser {
 
         String contentType = req.getContentType();
 
-        if (contentType.contains(FORM_CONTENT_TYPE) && method.equalsIgnoreCase(METHOD_POST)){
+        if (contentType.contains(HttpConstant.FORM_CONTENT_TYPE) && method.equalsIgnoreCase(HttpConstant.METHOD_POST)){
             return true;
         }else {
             return false;

@@ -1,17 +1,17 @@
-package web;
+package web.method;
 
 /**
  * @author: 邓小军
  * @since: 2020/1/20 16:23
  *
  */
-public class ParamHandler {
+public class MethodParameter {
 
     private Class type;
 
     private String fieldName;
 
-    public ParamHandler(Class type, String fieldName) {
+    public MethodParameter(Class type, String fieldName) {
         this.type = type;
         this.fieldName = fieldName;
     }

@@ -1,5 +1,9 @@
 package web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import web.method.HandlerMethod;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +17,7 @@ import java.io.PrintWriter;
  *
  */
 public class DispatcherServlet extends HttpServlet {
+    private static Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
 
     private HandlerMapping mapping;
 
@@ -27,29 +32,37 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     private void doService(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-        MethodHander methodHander = mapping.getHandler(getPath(req));
-        if (methodHander != null){
-            Object result = mapping.invoke(methodHander, req);
-            PrintWriter printWriter = null;
-            try {
-                printWriter = resp.getWriter();
-                printWriter.print(result);
+        HandlerExecuteChain handlerExecuteChain = HandlerExecuteChain.build(req, mapping);
+        HandlerExecuteAdaptor ha = new HandlerExecuteAdaptor();
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }finally {
-                printWriter.flush();
-                printWriter.close();
-            }
+        if (!handlerExecuteChain.applyPreExecuteHandle(req, resp)){
+            return;
+        }
+
+        // do hadle invo
+        Object result = null;
+        try {
+            result = ha.invokeHandleMethod(req, resp, (HandlerMethod)handlerExecuteChain.getHandler());
+        } catch (Exception e) {
+            logger.error("error occurs when invoke invokeHandleMethod",e);
+        }
+
+        handlerExecuteChain.applyPostExecuteHandle(req, resp);
+
+        // output
+        PrintWriter printWriter = null;
+        try {
+            printWriter = resp.getWriter();
+            printWriter.print(result);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            printWriter.flush();
+            printWriter.close();
         }
     }
 
-    private String getPath(HttpServletRequest req){
-        String uri = req.getRequestURI();
-        String contextPath = req.getContextPath();
-        String servletPath = req.getServletPath();
-        return uri.replaceFirst(contextPath,"").replaceFirst(servletPath,"");
-    }
 
     @Override
     public void init() throws ServletException {

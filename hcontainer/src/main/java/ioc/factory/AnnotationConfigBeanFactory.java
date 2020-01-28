@@ -3,8 +3,8 @@ package ioc.factory;
 import ioc.annotation.Component;
 import ioc.annotation.Controller;
 import ioc.annotation.Inject;
-import ioc.utils.PathUtil;
-import ioc.utils.StrUtil;
+import ioc.util.PathUtil;
+import ioc.util.StrUtil;
 import org.apache.log4j.Logger;
 
 import java.io.File;

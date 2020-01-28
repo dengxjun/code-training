@@ -1,4 +1,4 @@
-package ioc.utils;
+package ioc.util;
 
 import java.util.regex.Pattern;
 
