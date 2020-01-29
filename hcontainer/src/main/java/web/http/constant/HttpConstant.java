@@ -10,6 +10,15 @@ public class HttpConstant {
 
     public static final String FORM_CONTENT_TYPE = "application/x-www-form-urlencoded";
 
+    public static final String APPLICATION_XML_TYPE = "application/xml";
+
+    public static final String APPLICATION_JSON_TYPE = "application/json";
+
+    public static final String TEXT_XML_TYPE = "text/xml";
+
+    public static final String TEXT_PLAIN_TYPE = "text/plain";
+
+
     public static final String METHOD_POST = "POST";
 
     public static final String METHOD_GET = "GET";

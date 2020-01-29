@@ -1,6 +1,5 @@
 package web.method.resolver;
 
-import web.method.HandlerMethod;
 import web.method.MethodParameter;
 
 import javax.servlet.http.HttpServletRequest;

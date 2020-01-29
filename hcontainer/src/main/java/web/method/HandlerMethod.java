@@ -74,6 +74,10 @@ public class HandlerMethod {
 
     }
 
+    public void addMethodParam(MethodParameter methodParameter){
+        params.add(methodParameter);
+    }
+
     public List<Class<?>> getMethodParams() {
         List<Class<?>> typeParams = new ArrayList<>(params.size());
         for (MethodParameter pm : params){

@@ -1,5 +1,8 @@
 package ioc.util;
 
+import java.util.List;
+import java.util.Locale;
+
 /**
  * <p>Description: </p>
  *
@@ -7,20 +10,21 @@ package ioc.util;
  * @date 2020/1/28
  */
 public class Assert {
-    public static void notNull(Class<?> clazz, String msg) {
-        if (clazz == null){
+
+    public static void notNull(Object obj, String msg) {
+        if (obj == null){
             throw new RuntimeException(msg);
         }
     }
 
-    public static void notNull(Number number, String msg) {
-        if (number == null){
+    public static void notEmpty(List<Locale> locales, String msg) {
+        if (!CollectionUtils.isNotEmpty(locales)){
             throw new RuntimeException(msg);
         }
     }
 
-    public static void notNull(String str, String msg) {
-        if (str == null){
+    public static void isInstanceOf(Class cls, Object key, String msg) {
+        if (cls.isInstance(key)){
             throw new RuntimeException(msg);
         }
     }

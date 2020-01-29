@@ -70,7 +70,7 @@ public class StrUtil {
         while ((byteRead = ips.read(buffer)) != -1){
             out.append(new String(buffer));
         }
-        return out.toString();
+        return out.toString().trim();
     }
 
     /**
