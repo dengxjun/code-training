@@ -24,14 +24,17 @@ public class MethodParameterRequestProcessor {
 
     protected Object rsolveRequestBodyParameters(HttpServletRequest req, MethodParameter methodParameter) throws IOException {
         String httpMethod = req.getMethod();
+        String contentType = req.getContentType();
         Object obj = req.getParameter(methodParameter.getFieldName());
         if (!HttpConstant.METHOD_GET.equals(httpMethod) && obj == null){
             //解析body中参数
             String body = StrUtil.convertToStringFromInputStream(HttpServletRequestParser.getBody(req));
             logger.debug("request body: {}",body);
-            if (StrUtil.isNotEmpty(body)){
+            if (HttpConstant.FORM_CONTENT_TYPE.equals(contentType) && StrUtil.isNotEmpty(body)){
                 Map<String,List> pvMap = StrUtil.mapRequestBodyString(body);
                 obj = pvMap.get(methodParameter.getFieldName());
+            }else {
+                obj = body;
             }
         }
         return obj;

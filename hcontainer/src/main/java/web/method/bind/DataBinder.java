@@ -4,6 +4,7 @@ import ioc.util.StrUtil;
 import web.method.convert.ConvertFactory;
 import web.method.convert.Converter;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class DataBinder {
         this.target = target;
     }
 
-    public <T> T convertIfNecessary(Object value, Class<T> requiredType){
+    public <T> T convertIfNecessary(Object value, Class<T> requiredType) throws IOException {
         Converter converter = ConvertFactory.getConverter(requiredType);
         return converter == null ? (T)value : (T)converter.convert(value);
     }

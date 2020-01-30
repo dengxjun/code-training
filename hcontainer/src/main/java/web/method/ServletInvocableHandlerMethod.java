@@ -3,6 +3,7 @@ package web.method;
 import web.method.resolver.MethodParametersResolver;
 import web.method.resolver.support.MapMethodParametersResolver;
 import web.method.resolver.support.ModleAttributeMethodParameterResolver;
+import web.method.resolver.support.RequestBodyMethodParameterResolver;
 import web.method.resolver.support.RequestParamMethodParametersResolver;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ public class ServletInvocableHandlerMethod{
     private HandlerMethod handlerMethod;
 
     private List<MethodParametersResolver> methodParametersResolvers = new ArrayList<MethodParametersResolver>(){{
+        add(new RequestBodyMethodParameterResolver());
         add(new MapMethodParametersResolver());
         add(new ModleAttributeMethodParameterResolver());
         add(new RequestParamMethodParametersResolver());
@@ -67,6 +69,7 @@ public class ServletInvocableHandlerMethod{
             for (MethodParametersResolver resolver : methodParametersResolvers){
                 if (resolver.supportParameterType(methodParameter)){
                     obj = resolver.getMethodParametersValue(req, methodParameter);
+                    break;
                 }
             }
             args[index] = obj;

@@ -1,5 +1,7 @@
 package web.method.convert;
 
+import java.io.IOException;
+
 /**
  * <p>Description: </p>
  *
@@ -7,5 +9,5 @@ package web.method.convert;
  * @date 2020/1/28
  */
 public interface Converter<S, T> {
-    T convert(S source);
+    T convert(S source) throws IOException;
 }

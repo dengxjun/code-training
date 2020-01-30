@@ -11,6 +11,7 @@ import javassist.bytecode.MethodInfo;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +66,7 @@ public class HandlerMethod {
             if (attr != null)  {
                 int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;
                 for (int i = 0; i < parameterTypes.length; i++){
-                    params.add(new MethodParameter(parameterTypes[i], attr.variableName(i + pos)));
+                    params.add(new MethodParameter(parameterTypes[i], attr.variableName(i + pos),method.getParameters()[i]));
                 }
             }
         }catch(Exception e){
@@ -107,5 +108,4 @@ public class HandlerMethod {
     public void setRequestMethod(RequestMethod requestMethod) {
         this.requestMethod = requestMethod;
     }
-
 }
