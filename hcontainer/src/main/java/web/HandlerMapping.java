@@ -45,7 +45,7 @@ public class HandlerMapping {
         webApplicationContext = wac;
         AnnotationConfigBeanFactory beanFactory = (AnnotationConfigBeanFactory)wac.getBeanFactory();
 
-        List<BeanDefinition> definitions = beanFactory.getBeanDefinitions(Controller.class);
+        List<BeanDefinition> definitions = beanFactory.getControllerBeanDefinitions(Controller.class);
 
         if (definitions == null) return;
 

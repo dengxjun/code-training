@@ -1,12 +1,15 @@
 package ioc.factory;
 
+import ioc.annotation.Controller;
 import ioc.util.StrUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author: 邓小军
@@ -50,7 +53,39 @@ public abstract class AbstractBeanFactory implements BeanFactory{
         return getObject(beanDefinition);
     }
 
-    public Object getObject(BeanDefinition beanDefinition){
+    public List<BeanDefinition> getControllerBeanDefinitions(Class<Controller> controllerClass) {
+        return typeAnnotationDefinitionMap.get(controllerClass);
+    }
+
+    public List<BeanDefinition> getBeanDefinitions(){
+        return beanNameDefinitionMap.values().stream().collect(Collectors.toList());
+    }
+
+    public List<BeanDefinition> getBeanDefinitions(Class cls){
+        return (List<BeanDefinition>) classDefinitionMap.get(cls);
+    }
+
+    public BeanDefinition getBeanDefinition(String beanName){
+        return beanNameDefinitionMap.get(beanName);
+    }
+
+    /**
+     * 获取继承或者实现某个类的bean定义
+     * @param beanFactoryPostProcessorClass
+     * @return
+     */
+    public List<BeanDefinition> getBeanDefinitionAssignableFrom(Class<?> beanFactoryPostProcessorClass) {
+        List<BeanDefinition> resultList = new ArrayList<>();
+        List<BeanDefinition> beanDefinitions = this.getBeanDefinitions();
+        for (BeanDefinition beanDefinition : beanDefinitions){
+            if (beanFactoryPostProcessorClass.isAssignableFrom(beanDefinition.getTargetClass())){
+                resultList.add(beanDefinition);
+            }
+        }
+        return resultList;
+    }
+
+    private Object getObject(BeanDefinition beanDefinition){
 
         Object obj = null;
         try {

@@ -6,6 +6,10 @@ package ioc.factory;
  *
  */
 
+import ioc.annotation.Controller;
+
+import java.util.List;
+
 /**
  * The root interface for accessing a Spring bean container.
  * This is the basic client view of a bean container;
@@ -95,4 +99,5 @@ public interface BeanFactory {
      * @return
      */
     Object getBean(Class cls);
+
 }

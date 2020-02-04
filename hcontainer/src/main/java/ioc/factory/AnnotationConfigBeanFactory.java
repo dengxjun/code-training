@@ -139,7 +139,8 @@ public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
     }
 
 
-    public List<BeanDefinition> getBeanDefinitions(Class<Controller> controllerClass) {
+    public List<BeanDefinition> getControllerBeanDefinitions(Class<Controller> controllerClass) {
         return typeAnnotationDefinitionMap.get(controllerClass);
     }
+
 }
