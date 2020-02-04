@@ -1,4 +1,4 @@
-package web;
+package web.method;
 
 import ioc.annotation.RequestMethod;
 import javassist.ClassPool;
@@ -11,6 +11,7 @@ import javassist.bytecode.MethodInfo;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,13 +20,13 @@ import java.util.List;
  * @since: 2020/1/20 16:10
  *
  */
-public class MethodHander {
+public class HandlerMethod {
 
     private Class targetClass;
 
     private String targetMethodName;
 
-    private List<ParamHandler> params = new ArrayList<>();
+    private List<MethodParameter> params = new ArrayList<>();
 
     private RequestMethod requestMethod;
 
@@ -55,7 +56,7 @@ public class MethodHander {
             String classname = method.getDeclaringClass().getName();
             String methodname = method.getName();
             ClassPool pool = ClassPool.getDefault();
-            pool.insertClassPath(MethodHander.class.getClassLoader().getResource("").getPath());
+            pool.insertClassPath(HandlerMethod.class.getClassLoader().getResource("").getPath());
 
             CtClass cc = pool.get(classname);
             CtMethod cm = cc.getDeclaredMethod(methodname);
@@ -65,7 +66,7 @@ public class MethodHander {
             if (attr != null)  {
                 int pos = Modifier.isStatic(cm.getModifiers()) ? 0 : 1;
                 for (int i = 0; i < parameterTypes.length; i++){
-                    params.add(new ParamHandler(parameterTypes[i], attr.variableName(i + pos)));
+                    params.add(new MethodParameter(parameterTypes[i], attr.variableName(i + pos),method.getParameters()[i]));
                 }
             }
         }catch(Exception e){
@@ -74,9 +75,13 @@ public class MethodHander {
 
     }
 
+    public void addMethodParam(MethodParameter methodParameter){
+        params.add(methodParameter);
+    }
+
     public List<Class<?>> getMethodParams() {
         List<Class<?>> typeParams = new ArrayList<>(params.size());
-        for (ParamHandler pm : params){
+        for (MethodParameter pm : params){
             typeParams.add(pm.getType());
         }
 
@@ -85,14 +90,14 @@ public class MethodHander {
 
     public List<String> getMethodParamsField() {
         List<String> typeParams = new ArrayList<>(params.size());
-        for (ParamHandler pm : params){
+        for (MethodParameter pm : params){
             typeParams.add(pm.getFieldName());
         }
 
         return typeParams;
     }
 
-    public List<ParamHandler> getParams() {
+    public List<MethodParameter> getParams() {
         return params;
     }
 
@@ -103,22 +108,4 @@ public class MethodHander {
     public void setRequestMethod(RequestMethod requestMethod) {
         this.requestMethod = requestMethod;
     }
-
-    public Object invoke(Object obj, Object... args) {
-        try {
-            Class<?>[] clses = new Class<?>[params.size()];
-            getMethodParams().toArray(clses);
-            Method targetMethod = targetClass.getMethod(targetMethodName, clses);
-
-            return targetMethod.invoke(obj,args);
-
-        } catch (NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }

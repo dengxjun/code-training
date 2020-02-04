@@ -1,6 +1,8 @@
 package bussinessproject.controller;
 
+import bussinessproject.entity.User;
 import ioc.annotation.Controller;
+import ioc.annotation.RequestBody;
 import ioc.annotation.RequestMapping;
 
 /**
@@ -40,5 +42,11 @@ public class Demo1Controller {
     public String getTest5(String name, double age){
 
         return name+"#"+age;
+    }
+
+    @RequestMapping("test6")
+    public String getTest5(@RequestBody User user){
+
+        return user.getName()+"#"+user.getAge();
     }
 }

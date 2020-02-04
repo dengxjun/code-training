@@ -1,4 +1,4 @@
-package ioc.utils;
+package ioc.util;
 
 import org.junit.Assert;
 import org.junit.Test;

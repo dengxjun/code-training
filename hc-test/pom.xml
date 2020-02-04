@@ -19,7 +19,7 @@
         </dependency>
         <dependency>
             <groupId>heyman</groupId>
-            <artifactId>h-container</artifactId>
+            <artifactId>hcontainer</artifactId>
         </dependency>
     </dependencies>
 
