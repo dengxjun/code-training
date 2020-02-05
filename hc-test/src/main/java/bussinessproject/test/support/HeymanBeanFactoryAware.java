@@ -1,4 +1,4 @@
-package bussinessproject.support;
+package bussinessproject.test.support;
 
 import ioc.annotation.Component;
 import ioc.expand.BeanFactoryAware;
@@ -16,5 +16,9 @@ public class HeymanBeanFactoryAware implements BeanFactoryAware {
     @Override
     public void setBeanFactoryAware(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
+    }
+
+    public BeanFactory getBeanFactory() {
+        return beanFactory;
     }
 }

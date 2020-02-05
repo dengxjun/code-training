@@ -1,4 +1,4 @@
-package bussinessproject.service;
+package bussinessproject.test.service;
 
 /**
  * @author: 邓小军

@@ -1,6 +1,7 @@
-package bussinessproject.service;
+package bussinessproject.test.service;
 
-import bussinessproject.dao.Demo1Dao;
+import bussinessproject.test.dao.Demo1Dao;
+import bussinessproject.test.dao.Demo1Dao;
 import ioc.annotation.Component;
 import ioc.annotation.Inject;
 

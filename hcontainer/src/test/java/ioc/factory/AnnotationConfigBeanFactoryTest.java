@@ -1,7 +1,5 @@
 package ioc.factory;
 
-import bussinessproject.service.Demo2Service;
-import bussinessproject.service.DemoService;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
@@ -19,12 +17,12 @@ public class AnnotationConfigBeanFactoryTest {
         AnnotationConfigBeanFactory beanFactory = new AnnotationConfigBeanFactory();
         beanFactory.loadBeanDefinitions("bussinessproject");
         try {
-            DemoService obj1 = (DemoService)beanFactory.getBean(DemoService.class);
-
-            Demo2Service obj2 = (Demo2Service)beanFactory.getBean("demo2Service");
-
-            obj1.method1();
-            obj2.method1();
+//            DemoService obj1 = (DemoService)beanFactory.getBean(DemoService.class);
+//
+//            Demo2Service obj2 = (Demo2Service)beanFactory.getBean("demo2Service");
+//
+//            obj1.method1();
+//            obj2.method1();
 
         } catch (Exception e) {
             e.printStackTrace();

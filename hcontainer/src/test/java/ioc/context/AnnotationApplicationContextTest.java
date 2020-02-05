@@ -1,7 +1,7 @@
 package ioc.context;
 
-import bussinessproject.service.Demo2Service;
-import bussinessproject.service.DemoService;
+import bussinessproject.test.service.Demo2Service;
+import bussinessproject.test.service.DemoService;
 import ioc.factory.AnnotationConfigBeanFactory;
 import ioc.factory.AnnotationConfigBeanFactoryTest;
 import org.apache.log4j.Logger;

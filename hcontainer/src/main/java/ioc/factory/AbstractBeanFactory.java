@@ -1,6 +1,10 @@
 package ioc.factory;
 
 import ioc.annotation.Controller;
+import ioc.expand.ApplicationContextAware;
+import ioc.expand.BeanPostProcessor;
+import ioc.expand.InitializingBean;
+import ioc.util.CollectionUtils;
 import ioc.util.StrUtil;
 
 import java.lang.reflect.InvocationTargetException;
@@ -37,7 +41,9 @@ public abstract class AbstractBeanFactory implements BeanFactory{
 
         BeanDefinition beanDefinition = beanNameDefinitionMap.get(beanName);
         System.out.println(beanDefinition);
-        return getObject(beanDefinition);
+        Object targetBean = getObject(beanDefinition);
+        initializationBeanInstance(targetBean, beanName);
+        return targetBean;
     }
 
     @Override
@@ -83,6 +89,44 @@ public abstract class AbstractBeanFactory implements BeanFactory{
             }
         }
         return resultList;
+    }
+
+    private void initializationBeanInstance(Object targetBean, String beanName){
+
+        applyBeanPostProcessorBeforeInitialization(targetBean, beanName);
+        processInitializingBean(targetBean);
+        applyBeanPostProcessorAfterInitialization(targetBean, beanName);
+
+    }
+
+
+
+    protected void processInitializingBean(Object targetBean){
+        if (targetBean instanceof InitializingBean){
+            ((InitializingBean) targetBean).afterPropertiesSet();
+        }
+    }
+
+    protected void applyBeanPostProcessorBeforeInitialization(Object targetBean, String beanName) {
+        List<BeanDefinition> beanDefinitions = getBeanDefinitionAssignableFrom(BeanPostProcessor.class);
+        if (CollectionUtils.isEmpty(beanDefinitions)){
+            return;
+        }
+        for (BeanDefinition beanDefinition : beanDefinitions){
+            BeanPostProcessor beanPostProcessor = (BeanPostProcessor) getBean(beanDefinition.getBeanName());
+            beanPostProcessor.postProcessorBeforeInitializtion(targetBean, beanName);
+        }
+    }
+
+    private void applyBeanPostProcessorAfterInitialization(Object targetBean, String beanName) {
+        List<BeanDefinition> beanDefinitions = getBeanDefinitionAssignableFrom(BeanPostProcessor.class);
+        if (CollectionUtils.isEmpty(beanDefinitions)){
+            return;
+        }
+        for (BeanDefinition beanDefinition : beanDefinitions){
+            BeanPostProcessor beanPostProcessor = (BeanPostProcessor) getBean(beanDefinition.getBeanName());
+            beanPostProcessor.postProcessorAfterInitializtion(targetBean, beanName);
+        }
     }
 
     private Object getObject(BeanDefinition beanDefinition){

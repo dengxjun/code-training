@@ -1,6 +1,13 @@
-package bussinessproject.controller;
+package bussinessproject.test.controller;
 
+import bussinessproject.test.entity.User;
+import bussinessproject.test.service.Demo2Service;
+import bussinessproject.test.service.DemoService;
+import bussinessproject.test.entity.User;
+import bussinessproject.test.service.DemoService;
 import ioc.annotation.Controller;
+import ioc.annotation.Inject;
+import ioc.annotation.RequestBody;
 import ioc.annotation.RequestMapping;
 
 /**
@@ -12,6 +19,12 @@ import ioc.annotation.RequestMapping;
 @Controller
 @RequestMapping("demo1")
 public class Demo1Controller {
+
+    @Inject
+    private DemoService demoService;
+
+    @Inject
+    private Demo2Service demo2Service;
 
     @RequestMapping("test")
     public String getTest(String name, Integer age){
@@ -40,5 +53,11 @@ public class Demo1Controller {
     public String getTest5(String name, double age){
 
         return name+"#"+age;
+    }
+
+    @RequestMapping("test6")
+    public String getTest5(@RequestBody User user){
+
+        return user.getName()+"#"+user.getAge();
     }
 }
