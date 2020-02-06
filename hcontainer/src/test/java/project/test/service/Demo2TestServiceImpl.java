@@ -1,6 +1,6 @@
-package bussinessproject.service;
+package project.test.service;
 
-import bussinessproject.dao.Demo2Dao;
+import project.test.dao.Demo2TestDao;
 import ioc.annotation.Component;
 import ioc.annotation.Inject;
 
@@ -11,25 +11,25 @@ import ioc.annotation.Inject;
  */
 
 @Component("demo2Service")
-public class Demo2ServiceImpl implements Demo2Service {
+public class Demo2TestServiceImpl implements Demo2TestService {
 
     @Inject
-    private Demo2Dao demo2Dao;
+    private Demo2TestDao demo2TestDao;
 
     @Override
     public void method1(){
         System.out.println("run demo2 method 1....");
-        demo2Dao.save();
+        demo2TestDao.save();
     }
 
 
     @Override
     public void method2(){
         System.out.println("run demo2  method 2....");
-        demo2Dao.save();
+        demo2TestDao.save();
     }
 
-    public void setDemo2Dao(Demo2Dao demo1Dao) {
-        this.demo2Dao = demo1Dao;
+    public void setDemo2TestDao(Demo2TestDao demo1Dao) {
+        this.demo2TestDao = demo1Dao;
     }
 }

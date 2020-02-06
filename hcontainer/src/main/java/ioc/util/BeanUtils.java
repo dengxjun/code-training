@@ -1,7 +1,9 @@
 package ioc.util;
 
+import ioc.annotation.Controller;
 import org.apache.commons.lang3.ClassUtils;
 
+import java.lang.annotation.Annotation;
 import java.net.URI;
 import java.net.URL;
 import java.util.Date;
@@ -41,5 +43,15 @@ public class BeanUtils {
                 Date.class.isAssignableFrom(clazz) ||
                 clazz.equals(URI.class) || clazz.equals(URL.class) ||
                 clazz.equals(Locale.class) || clazz.equals(Class.class);
+    }
+
+    public static boolean containAnnotation(Class targetClass, Class<Controller> controllerClass) {
+        Annotation[] annotations = targetClass.getAnnotations();
+        for (Annotation ann : annotations) {
+            if (controllerClass.isAssignableFrom(ann.annotationType())){
+                return true;
+            }
+        }
+        return false;
     }
 }

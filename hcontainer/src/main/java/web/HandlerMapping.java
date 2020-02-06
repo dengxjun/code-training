@@ -4,6 +4,7 @@ import ioc.annotation.Controller;
 import ioc.annotation.RequestMapping;
 import ioc.factory.AnnotationConfigBeanFactory;
 import ioc.factory.BeanDefinition;
+import ioc.util.BeanUtils;
 import ioc.util.StrUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,12 +46,15 @@ public class HandlerMapping {
         webApplicationContext = wac;
         AnnotationConfigBeanFactory beanFactory = (AnnotationConfigBeanFactory)wac.getBeanFactory();
 
-        List<BeanDefinition> definitions = beanFactory.getBeanDefinitions(Controller.class);
+        List<BeanDefinition> definitions = beanFactory.getBeanDefinitions();
 
         if (definitions == null) return;
 
         for (BeanDefinition beanDefinition : definitions){
             Class targetClass = beanDefinition.getTargetClass();
+            if (!BeanUtils.containAnnotation(targetClass, Controller.class)){
+                continue;
+            }
             RequestMapping typeRM = (RequestMapping)targetClass.getAnnotation(RequestMapping.class);
             String tpyePath = typeRM.value();
 

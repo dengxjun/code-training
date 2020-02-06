@@ -1,9 +1,10 @@
 package ioc.factory;
 
-import bussinessproject.service.Demo2Service;
-import bussinessproject.service.DemoService;
-import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import project.test.service.Demo2TestService;
+import project.test.service.DemoTestService;
 
 /**
  * @author: 邓小军
@@ -11,17 +12,17 @@ import org.junit.Test;
  *
  */
 public class AnnotationConfigBeanFactoryTest {
-    private static Logger log = Logger.getLogger(AnnotationConfigBeanFactoryTest.class);
+    private static Logger log = LoggerFactory.getLogger(AnnotationConfigBeanFactoryTest.class);
 
     @Test
     public void loadBeanDefinitions() {
-        log.debug("start.....");
+        log.debug("start.....{}",1);
         AnnotationConfigBeanFactory beanFactory = new AnnotationConfigBeanFactory();
-        beanFactory.loadBeanDefinitions("bussinessproject");
+        beanFactory.loadBeanDefinitions("project");
         try {
-            DemoService obj1 = (DemoService)beanFactory.getBean(DemoService.class);
+            DemoTestService obj1 = (DemoTestService)beanFactory.getBean(DemoTestService.class);
 
-            Demo2Service obj2 = (Demo2Service)beanFactory.getBean("demo2Service");
+            Demo2TestService obj2 = (Demo2TestService)beanFactory.getBean("demo2Service");
 
             obj1.method1();
             obj2.method1();

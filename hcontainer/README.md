@@ -8,7 +8,7 @@ HContainer, 模拟sprin核心模块实现
 ### 代码优化
 
 ### 技术点记录
-[涉及技术点记录](https://github.com/dengxjun/code-training/wiki/wiki-index)
+[涉及技术点记录](https://github.com/dengxjun/code-training/wiki)
 
 ## 第二阶段
 - 模拟实现spring BeanPostProcessor

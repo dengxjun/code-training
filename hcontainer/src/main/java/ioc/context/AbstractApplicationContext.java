@@ -1,6 +1,14 @@
 package ioc.context;
 
+import ioc.expand.ApplicationContextAware;
+import ioc.expand.BeanFactoryAware;
+import ioc.expand.BeanFactoryPostProcessor;
+import ioc.factory.AbstractBeanFactory;
+import ioc.factory.BeanDefinition;
 import ioc.factory.BeanFactory;
+import ioc.util.CollectionUtils;
+
+import java.util.List;
 
 /**
  *
@@ -50,6 +58,44 @@ public abstract class AbstractApplicationContext implements ApplicationContext {
     public BeanFactory getBeanFactory() {
         return beanFactory;
     }
+
+    /**
+     * 1. 遍历BeanDefinitions,筛选实现BeanFactoryPostProcessor接口的BeanDefinition
+     * 2. 获取bean, 并调用postProcessAfterBeanFactory方法
+     */
+    protected void applyBeanFactoryProcessor() {
+        List<BeanDefinition> beanDefinitions = ((AbstractBeanFactory)getBeanFactory()).getBeanDefinitionAssignableFrom(BeanFactoryPostProcessor.class);
+        if (CollectionUtils.isEmpty(beanDefinitions)){
+            return;
+        }
+        for (BeanDefinition beanDefinition : beanDefinitions){
+            BeanFactoryPostProcessor postProcessor = (BeanFactoryPostProcessor) getBeanFactory().getBean(beanDefinition.getBeanName());
+            postProcessor.postProcessAfterBeanFactory(getBeanFactory());
+        }
+    }
+
+    protected void applyBeanFactoryAware() {
+        List<BeanDefinition> beanDefinitions = ((AbstractBeanFactory)getBeanFactory()).getBeanDefinitionAssignableFrom(BeanFactoryAware.class);
+        if (CollectionUtils.isEmpty(beanDefinitions)){
+            return;
+        }
+        for (BeanDefinition beanDefinition : beanDefinitions){
+            BeanFactoryAware factoryAware = (BeanFactoryAware) getBeanFactory().getBean(beanDefinition.getBeanName());
+            factoryAware.setBeanFactoryAware(getBeanFactory());
+        }
+    }
+
+    protected void applyApplicationContextAware() {
+        List<BeanDefinition> beanDefinitions = ((AbstractBeanFactory)getBeanFactory()).getBeanDefinitionAssignableFrom(ApplicationContextAware.class);
+        if (CollectionUtils.isEmpty(beanDefinitions)){
+            return;
+        }
+        for (BeanDefinition beanDefinition : beanDefinitions){
+            ApplicationContextAware applicationContextAware = (ApplicationContextAware) getBeanFactory().getBean(beanDefinition.getBeanName());
+            applicationContextAware.setApplicationContextAware(this);
+        }
+    }
+
 
     public void setBeanFactory(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
