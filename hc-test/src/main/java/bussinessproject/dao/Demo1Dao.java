@@ -1,13 +1,13 @@
 package bussinessproject.dao;
 
-import ioc.annotation.Component;
+import ioc.annotation.Repository;
 
 /**
  * @author: 邓小军
  * @since: 2020/1/19 17:59
  *
  */
-@Component
+@Repository
 public class Demo1Dao{
     public void save (){
         System.out.println("Demo1Dao saveing....");

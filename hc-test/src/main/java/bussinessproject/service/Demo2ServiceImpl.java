@@ -1,9 +1,8 @@
 package bussinessproject.service;
 
 import bussinessproject.dao.Demo2Dao;
-import bussinessproject.support.HeymanInvocationHandler;
-import ioc.annotation.Component;
 import ioc.annotation.Inject;
+import ioc.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +12,7 @@ import org.slf4j.LoggerFactory;
  *
  */
 
-@Component("demo2Service")
+@Service("demo2Service")
 public class Demo2ServiceImpl implements Demo2Service {
     private static Logger logger = LoggerFactory.getLogger(Demo2ServiceImpl.class);
 

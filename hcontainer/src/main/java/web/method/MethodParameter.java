@@ -46,10 +46,10 @@ public class MethodParameter {
     }
 
     public Annotation getAnnotationType(Class targetAnnotation){
-        Annotation[] annotations = parameter.getAnnotations();
-        if (annotations.length == 0){
-            return null;
+        if (parameter == null || parameter.getAnnotations().length == 0){
+            return  null;
         }
+        Annotation[] annotations = parameter.getAnnotations();
 
         for (Annotation annotation : annotations){
             if (targetAnnotation.isInstance(annotation)){

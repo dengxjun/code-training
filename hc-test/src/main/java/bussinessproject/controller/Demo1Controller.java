@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
  */
 
 @Controller
-@Component
 @RequestMapping("demo1")
 public class Demo1Controller {
     private static Logger logger = LoggerFactory.getLogger(Demo1Controller.class);
