@@ -12,6 +12,6 @@ public class PathUtilTest {
 
     @Test
     public void convertToFullClasspath() {
-        Assert.assertEquals("bussinessproject.service.DemoServiceImpl",PathUtil.convertToFullClasspath("bussinessproject/service/DemoServiceImpl.class"));
+        Assert.assertEquals("bussinessproject.service.DemoTestServiceImpl",PathUtil.convertToFullClasspath("bussinessproject/service/DemoTestServiceImpl.class"));
     }
 }

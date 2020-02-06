@@ -42,7 +42,6 @@ public abstract class AbstractBeanFactory implements BeanFactory{
         BeanDefinition beanDefinition = beanNameDefinitionMap.get(beanName);
         System.out.println(beanDefinition);
         Object targetBean = getObject(beanDefinition);
-        initializationBeanInstance(targetBean, beanName);
         return targetBean;
     }
 
@@ -57,10 +56,6 @@ public abstract class AbstractBeanFactory implements BeanFactory{
         }
 
         return getObject(beanDefinition);
-    }
-
-    public List<BeanDefinition> getControllerBeanDefinitions(Class<Controller> controllerClass) {
-        return typeAnnotationDefinitionMap.get(controllerClass);
     }
 
     public List<BeanDefinition> getBeanDefinitions(){
@@ -91,12 +86,11 @@ public abstract class AbstractBeanFactory implements BeanFactory{
         return resultList;
     }
 
-    private void initializationBeanInstance(Object targetBean, String beanName){
+    private Object initializationBeanInstance(Object targetBean, String beanName){
 
         applyBeanPostProcessorBeforeInitialization(targetBean, beanName);
         processInitializingBean(targetBean);
-        applyBeanPostProcessorAfterInitialization(targetBean, beanName);
-
+        return targetBean = applyBeanPostProcessorAfterInitialization(targetBean, beanName);
     }
 
 
@@ -118,15 +112,16 @@ public abstract class AbstractBeanFactory implements BeanFactory{
         }
     }
 
-    private void applyBeanPostProcessorAfterInitialization(Object targetBean, String beanName) {
+    private Object applyBeanPostProcessorAfterInitialization(Object targetBean, String beanName) {
         List<BeanDefinition> beanDefinitions = getBeanDefinitionAssignableFrom(BeanPostProcessor.class);
         if (CollectionUtils.isEmpty(beanDefinitions)){
-            return;
+            return targetBean;
         }
         for (BeanDefinition beanDefinition : beanDefinitions){
             BeanPostProcessor beanPostProcessor = (BeanPostProcessor) getBean(beanDefinition.getBeanName());
-            beanPostProcessor.postProcessorAfterInitializtion(targetBean, beanName);
+            targetBean = beanPostProcessor.postProcessorAfterInitializtion(targetBean, beanName);
         }
+        return targetBean;
     }
 
     private Object getObject(BeanDefinition beanDefinition){
@@ -157,6 +152,7 @@ public abstract class AbstractBeanFactory implements BeanFactory{
 
 
         cachedBeans.put(beanDefinition.getBeanName(), obj);
+        obj = initializationBeanInstance(obj, beanDefinition.getBeanName());
         return obj;
     }
 }

@@ -5,10 +5,13 @@ import ioc.annotation.Controller;
 import ioc.annotation.Inject;
 import ioc.util.PathUtil;
 import ioc.util.StrUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.*;
 
@@ -18,7 +21,7 @@ import java.util.*;
  *
  */
 public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
-    private static Logger log = Logger.getLogger(AnnotationConfigBeanFactory.class);
+    private static Logger log = LoggerFactory.getLogger(AnnotationConfigBeanFactory.class);
 
     @Override
     public void loadBeanDefinitions(String pathName) {
@@ -44,7 +47,7 @@ public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
                 File file = new File(url.toURI());
                 if (file.isDirectory()){
                     for (String fileName : file.list()){
-                        log.debug("scan packages {}" + fileName);
+                        log.debug("scan packages {}" , fileName);
                         scanPackages(pathName+"/"+fileName, classes);
                     }
                 }else {
@@ -63,7 +66,9 @@ public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
     private void doLoadBeanDefinition(Set<Class> classes){
         for (Class cls : classes){
 
-            if (cls.isInterface()) continue;
+            if (cls.isInterface() || !containComponentAnnotation(cls)){
+                continue;
+            }
 
             BeanDefinition definition = new BeanDefinition();
             definition.setTargetClass(cls);
@@ -76,9 +81,7 @@ public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
                 });
             }
 
-
             praseComponentAnnotation(definition , cls);
-            praseControllerAnnotation(definition , cls);
 
             Field[] fields = cls.getDeclaredFields();
             if (fields.length > 0){
@@ -94,43 +97,11 @@ public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
         }
     }
 
-    public void praseControllerAnnotation(BeanDefinition definition, Class cls){
-
-        String beanName = null;
-
-        Controller clsDeclaredAnnotation = (Controller)cls.getDeclaredAnnotation(Controller.class);
-
-        if (clsDeclaredAnnotation == null){
-            return;
-        }
-
-        beanName = clsDeclaredAnnotation.value();
-
-        if (StrUtil.isEmpty(beanName)){
-            beanName = StrUtil.toLowCaseFirstChar(cls.getSimpleName());
-        }
-        definition.setBeanName(beanName);
-
-        List lst = typeAnnotationDefinitionMap.get(Controller.class);
-        if (lst == null){
-            lst = new ArrayList();
-        }
-        lst.add(definition);
-
-        typeAnnotationDefinitionMap.put(Controller.class, lst);
-    }
-
     private void praseComponentAnnotation(BeanDefinition definition, Class cls){
 
         String beanName = null;
 
-        Component clsDeclaredAnnotation = (Component)cls.getDeclaredAnnotation(Component.class);
-
-        if (clsDeclaredAnnotation == null){
-            return;
-        }
-
-        beanName = clsDeclaredAnnotation.value();
+        beanName = getAnnotationValue(cls);
 
         if (StrUtil.isEmpty(beanName)){
             beanName = StrUtil.toLowCaseFirstChar(cls.getSimpleName());
@@ -138,9 +109,47 @@ public class AnnotationConfigBeanFactory extends AbstractBeanFactory {
         definition.setBeanName(beanName);
     }
 
+    private boolean containComponentAnnotation(Class cls){
+        Annotation[] annotations = cls.getAnnotations();
+        for (Annotation ann : annotations){
+            if (Component.class.isAssignableFrom(ann.annotationType())){
+                return true;
+            }else if (!isExcludeAnnotation(ann)){
+                return containComponentAnnotation(ann.annotationType());
+            }
+        }
+        return false;
+    }
 
-    public List<BeanDefinition> getControllerBeanDefinitions(Class<Controller> controllerClass) {
-        return typeAnnotationDefinitionMap.get(controllerClass);
+    private String getAnnotationValue(Class cls){
+        Annotation[] annotations = cls.getAnnotations();
+        for (Annotation ann : annotations){
+            if (Component.class.isAssignableFrom(ann.annotationType())){
+                return (String) invokeAnnotationMethod(ann, "value");
+            }else if (!isExcludeAnnotation(ann) && containComponentAnnotation(ann.annotationType())){
+                return (String) invokeAnnotationMethod(ann, "value");
+            }
+        }
+        return null;
+    }
+
+    private Object invokeAnnotationMethod(Annotation ann, String methodName) {
+        Object result = null;
+        try {
+            result = ann.annotationType().getMethod(methodName).invoke(ann);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private boolean isExcludeAnnotation(Annotation ann){
+        if (ann.annotationType().getName().equals("java.lang.annotation.Documented")
+                || ann.annotationType().getName().equals("java.lang.annotation.Retention")
+                || ann.annotationType().getName().equals("java.lang.annotation.Target")){
+            return true;
+        }
+        return false;
     }
 
 }

@@ -1,14 +1,11 @@
-package bussinessproject.test.controller;
+package bussinessproject.controller;
 
-import bussinessproject.test.entity.User;
-import bussinessproject.test.service.Demo2Service;
-import bussinessproject.test.service.DemoService;
-import bussinessproject.test.entity.User;
-import bussinessproject.test.service.DemoService;
-import ioc.annotation.Controller;
-import ioc.annotation.Inject;
-import ioc.annotation.RequestBody;
-import ioc.annotation.RequestMapping;
+import bussinessproject.entity.User;
+import bussinessproject.service.Demo2Service;
+import bussinessproject.service.DemoService;
+import ioc.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author: 邓小军
@@ -17,8 +14,10 @@ import ioc.annotation.RequestMapping;
  */
 
 @Controller
+@Component
 @RequestMapping("demo1")
 public class Demo1Controller {
+    private static Logger logger = LoggerFactory.getLogger(Demo1Controller.class);
 
     @Inject
     private DemoService demoService;
@@ -28,7 +27,8 @@ public class Demo1Controller {
 
     @RequestMapping("test")
     public String getTest(String name, Integer age){
-
+        logger.debug("Demo1Controller getTest","aa");
+        demoService.method1();
         return name+"#"+age;
     }
 
@@ -59,5 +59,13 @@ public class Demo1Controller {
     public String getTest5(@RequestBody User user){
 
         return user.getName()+"#"+user.getAge();
+    }
+
+    public void setDemo2Service(Demo2Service demo2Service) {
+        this.demo2Service = demo2Service;
+    }
+
+    public void setDemoService(DemoService demoService) {
+        this.demoService = demoService;
     }
 }

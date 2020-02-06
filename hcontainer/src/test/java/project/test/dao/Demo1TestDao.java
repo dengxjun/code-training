@@ -1,4 +1,4 @@
-package bussinessproject.test.dao;
+package project.test.dao;
 
 import ioc.annotation.Component;
 
@@ -8,8 +8,8 @@ import ioc.annotation.Component;
  *
  */
 @Component
-public class Demo1Dao {
+public class Demo1TestDao {
     public void save (){
-        System.out.println("Demo1Dao saveing....");
+        System.out.println("Demo1TestDao saveing....");
     }
 }

@@ -1,4 +1,4 @@
-package bussinessproject.test.support;
+package bussinessproject.support;
 
 import ioc.annotation.Component;
 import ioc.context.ApplicationContext;

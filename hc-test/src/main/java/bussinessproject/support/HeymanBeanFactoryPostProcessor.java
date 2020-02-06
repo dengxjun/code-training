@@ -1,8 +1,10 @@
-package bussinessproject.test.support;
+package bussinessproject.support;
 
 import ioc.annotation.Component;
 import ioc.expand.BeanFactoryPostProcessor;
 import ioc.factory.BeanFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>Description: </p>
@@ -12,8 +14,10 @@ import ioc.factory.BeanFactory;
  */
 @Component
 public class HeymanBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
+    private static Logger logger = LoggerFactory.getLogger(HeymanBeanFactoryPostProcessor.class);
+
     @Override
     public void postProcessAfterBeanFactory(BeanFactory beanFactory) {
-        System.out.println("-----beanFactory---");
+        logger.debug("-----beanFactory---");
     }
 }

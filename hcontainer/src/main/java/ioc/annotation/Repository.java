@@ -6,15 +6,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author: 邓小军
- * @since: 2020/1/19 14:11
+ * <p>Description: </p>
  *
+ * @author heyman
+ * @date 2020/2/6
  */
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.TYPE})
 @Component
-public @interface Controller {
+public @interface Repository {
     String value() default "";
-    String aias() default "";
 }
