@@ -12,6 +12,7 @@
         <module>trains-problems</module>
         <module>hc-test</module>
         <module>bread</module>
+        <module>hkitchen</module>
     </modules>
 
     <packaging>pom</packaging>
