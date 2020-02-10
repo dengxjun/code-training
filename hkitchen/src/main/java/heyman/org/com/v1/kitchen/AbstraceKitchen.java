@@ -31,6 +31,12 @@ public abstract class AbstraceKitchen implements HKitchen{
      */
     private List<HIngredients> ingredientses;
 
+    public AbstraceKitchen(){
+        init();
+    }
+
+    abstract void init();
+
     public List<HContainer> getContainers() {
         return containers;
     }

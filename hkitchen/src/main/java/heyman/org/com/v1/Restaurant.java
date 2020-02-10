@@ -1,6 +1,5 @@
 package heyman.org.com.v1;
 
-import heyman.org.com.v1.cook.AbstractCook;
 import heyman.org.com.v1.cook.ConcreteCook;
 import heyman.org.com.v1.cook.HCook;
 import heyman.org.com.v1.cookmenu.MenuLsit;
@@ -26,11 +25,11 @@ public class Restaurant {
         cook = new ConcreteCook(kitchen);
     }
 
-    void procssOrder(Order order){
+    void procssOrder(Order order) throws Exception {
         cook.startCookMeal(order);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Restaurant restaurant = new Restaurant();
         Order order = new Order();
         OrderItem orderItem = new OrderItem();

@@ -30,11 +30,6 @@ public class ConcreteCook extends AbstractCook{
         LOGGER.debug("start do cook===");
     }
 
-    @Override
-    protected HCookBook getCookMenu(MenuLsit menuLsit) {
-        LOGGER.debug("start do getCookMenu===");
-        return null;
-    }
 
     @Override
     protected void prepareHIngredients(CookContext cookContext, HCookBook cookMenu) {
@@ -42,7 +37,7 @@ public class ConcreteCook extends AbstractCook{
     }
 
     @Override
-    public void startCookMeal(Order order) {
+    public void startCookMeal(Order order) throws Exception {
         super.startCookMeal(order);
     }
 }

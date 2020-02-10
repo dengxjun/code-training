@@ -7,6 +7,8 @@ package heyman.org.com.v1.kitchen;
  * @date 2020/2/10
  */
 public class ConcreteKitchenA extends AbstraceKitchen{
+    @Override
+    void init() {
 
-
+    }
 }

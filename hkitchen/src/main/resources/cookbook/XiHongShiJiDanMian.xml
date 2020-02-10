@@ -1,0 +1,23 @@
+<CommonCookBook>
+    <cookMenuName>西红柿鸡蛋面</cookMenuName>
+    <commonVegetables>
+        <commonVegetables>
+            <name>西红柿</name>
+            <unit>个</unit>
+            <number>2</number>
+        </commonVegetables>
+    </commonVegetables>
+    <commonCondiments>
+        <commonCondiments>
+            <name>盐</name>
+            <unit>克</unit>
+            <number>30</number>
+        </commonCondiments>
+    </commonCondiments>
+    <cookProcedure>
+        <cookProcedure>烧锅</cookProcedure>
+        <cookProcedure>倒油</cookProcedure>
+        <cookProcedure>倒入葱姜蒜</cookProcedure>
+        <cookProcedure>倒入绿菜</cookProcedure>
+    </cookProcedure>
+</CommonCookBook>

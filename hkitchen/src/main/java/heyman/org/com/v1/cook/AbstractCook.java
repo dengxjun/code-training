@@ -1,11 +1,14 @@
 package heyman.org.com.v1.cook;
 
 import heyman.org.com.v1.Order;
+import heyman.org.com.v1.cookmenu.CookBookLoader;
 import heyman.org.com.v1.cookmenu.HCookBook;
 import heyman.org.com.v1.cookmenu.MenuLsit;
 import heyman.org.com.v1.kitchen.HKitchen;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 /**
  * <p>Description: </p>
@@ -30,7 +33,7 @@ public abstract class AbstractCook implements HCook {
     }
 
     @Override
-    public void startCookMeal(Order order) {
+    public void startCookMeal(Order order) throws Exception {
         LOGGER.debug("startCookMeal= Order info {}", order);
         cookContext.setKitchen(kitchen);
 
@@ -43,12 +46,15 @@ public abstract class AbstractCook implements HCook {
          prepareHIngredients(cookContext, cookMenu);
         //开始做饭
         doCook(cookContext);
+        LOGGER.debug("end startCookMeal context:{}",cookContext);
     }
 
     protected abstract void prepareHIngredients(CookContext cookContext, HCookBook cookMenu);
 
 
-    protected abstract HCookBook getCookMenu(MenuLsit menuLsit);
+    protected HCookBook getCookMenu(MenuLsit menuLsit) throws IOException {
+        return CookBookLoader.getInstance().getCookBook(menuLsit);
+    }
 
     protected abstract void checkHIngredients(HCookBook cookMenu);
 
