@@ -13,6 +13,7 @@
         <module>hc-test</module>
         <module>bread</module>
         <module>hkitchen</module>
+        <module>flink-examples</module>
     </modules>
 
     <packaging>pom</packaging>
