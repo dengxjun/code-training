@@ -39,6 +39,7 @@ public abstract class AbstractBeanFactory implements BeanFactory{
             return obj;
         }
 
+
         BeanDefinition beanDefinition = beanNameDefinitionMap.get(beanName);
         System.out.println(beanDefinition);
         Object targetBean = getObject(beanDefinition);
