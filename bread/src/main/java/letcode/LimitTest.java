@@ -28,7 +28,8 @@ public class LimitTest implements Runnable{
         // 5s 请选择LimitLevel.TIME_LEVEL_1
         // 1min 请选择LimitLevel.TIME_LEVEL_2
         // 1h 请选择LimitLevel.TIME_LEVEL_3
-        LimitTest limitTest = new LimitTest(slideWindow, LimitLevel.TIME_LEVEL_1);
+//        LimitTest limitTest = new LimitTest(slideWindow, LimitLevel.TIME_LEVEL_1);
+        LimitTest limitTest = new LimitTest(slideWindow, LimitLevel.TIME_LEVEL_2);
         new Thread(limitTest).start();
     }
 
